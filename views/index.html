@@ -1,0 +1,82 @@
+<html>
+<head>
+	<script type='text/javascript' src='/js/LAB.js'></script>
+	<script type='text/javascript' src='/js/jquery.js'></script>
+	<script type='text/javascript' src='/js/jquery.tmpl.js'></script>
+	<script type='text/javascript' src='/js/underscore.js'></script>
+	<script type='text/javascript' src='/js/backbone.js'></script>
+	<script type='text/javascript' src='/js/json2.js'></script>
+<!--
+	<script type='text/javascript' src='/js/application.js'></script>
+-->
+	{:addscripts:}
+<!--	{:addcss:} -->
+	<link href="/css/reset.css" media="all" rel="stylesheet" type="text/css" />
+	<link href="/css/application.css" media="all" rel="stylesheet" type="text/css" />
+	
+	
+	<title>Classes</title>
+</head>
+<body>
+
+<script type="text/javascript">
+
+$(function(){
+
+    App.init();
+});
+//    $(function() {
+//        App.init();
+//    });
+</script>
+<div id="notice"></div>
+<div id="app"></div>
+
+
+<script type="text/x-jquery-tmpl" id="class-list-template">
+<h1>Classes</h1>
+<ul>
+    {{each classes}}
+    <li><a href="#classes/${id}">${name}</a><a href="#" class="right delete" data="${id}">Delete</a></li>
+    {{/each}}
+</ul>
+<a href="#classes-new" >Add Class</a>
+</script>
+
+<script type="text/x-jquery-tmpl" id="class-edit-template">
+<form>
+    <label for="name">Name</label>
+    <input name="name" type="text" value="${model.get('name')}"></input> <br/>
+    <label for="description">Description</label> <textarea name="description" type="text" >${model.get('description')}</textarea> <br/>
+    
+<ul>
+<h3>Tests</h3>
+    {{each model.get('tests')}}
+    <li> <a href="#classes/${model.id}/tests/${id}">${name}</a><a href="#" class="right delete" data="${id}">Delete</a></li>
+    {{/each}}
+</ul>
+<a href="#classes/${model.id}/tests-new" >Add Test</a><br/>
+<button class="save">{{if model.isNew() }}Add{{else}}Save{{/if}}</button>
+</form>
+
+</script>
+
+<script type="text/x-jquery-tmpl" id="test-edit-template">
+<form>	
+    <label for="name">Name</label>
+    <input name="name" type="text" value="${model.get('name')}"></input> <br/>
+    <label for="description">Description</label> <textarea name="description" type="text" >${model.get('description')}</textarea> <br/>
+    
+<ul>
+<h3></h3>
+    {{each model.get('scales')}}
+    <li> <a href="#scales/${id}">${name}</a></li>
+    {{/each}}
+</ul>
+
+<a href="#newScale" >Add Scale</a><br/>
+<button>{{if model.isNew() }}Add{{else}}Save{{/if}}</button>
+</form>
+</script>
+</body>
+
